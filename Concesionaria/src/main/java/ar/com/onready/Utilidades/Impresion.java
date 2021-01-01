@@ -1,17 +1,19 @@
 package ar.com.onready.Utilidades;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ar.com.onready.Entidades.Vehiculo;
 
 public class Impresion {
-	private List <Vehiculo> vehiculos;
+	
+	private Set<Vehiculo> vehiculos;
 	
 	//Constructor
 	public Impresion() {
-		vehiculos = new ArrayList<Vehiculo>();
+		vehiculos = new LinkedHashSet<Vehiculo>();
 	}
 	
 	//Methods
@@ -20,43 +22,45 @@ public class Impresion {
 	}
 	
 	public void showVehiculos() {
-		for (int i = 0; i < vehiculos.size(); i++) {
-			System.out.println(vehiculos.get(i));
+		for (Vehiculo vehiculo : vehiculos) {
+			System.out.println(vehiculo);
 		}
 		System.out.println("=============================");
 	}
 	
-	public List<Vehiculo> find(String c, List <Vehiculo> coincidentes){
-		for (int i = 0; i < vehiculos.size(); i++) {
-			if (vehiculos.get(i).getModelo().contains(c)) {
-				coincidentes.add(vehiculos.get(i));
-			};
+	
+	public Set<Vehiculo> find(String c, Set<Vehiculo> vehiculos){
+		Set<Vehiculo> coincidentes= new HashSet<>();
+		for (Vehiculo vehiculo : vehiculos) {
+			if(vehiculo.getModelo().contains(c)) {
+				coincidentes.add(vehiculo);
+			}
 		}
 		return coincidentes;
-	}
+	} 
 	
 	public void showCategory(){
-		List <Vehiculo> coincidentes = new ArrayList<Vehiculo>();
+		TreeSet<Vehiculo> ordenados = new TreeSet<>(vehiculos);
+		System.out.println("Vehiculo mas caro: "+ordenados.last().printModelo());
+		System.out.println("Vehiculo mas barato: "+ordenados.first().printModelo());
 		
-		vehiculos.sort(Comparator.comparing(Vehiculo::getPrecio).reversed());
-		System.out.println("Vehiculo mas caro: "+vehiculos.get(0).printModelo());
-		System.out.println("Vehiculo mas barato: "+vehiculos.get(vehiculos.size()-1).printModelo());
-		
-		find("Y",coincidentes);
-		System.out.print("Vehiculos que contienen en el modelo la letra Y: ");
-		for (int i = 0; i < coincidentes.size(); i++) {
-			System.out.println(coincidentes.get(i).printModelo() +" $"+ coincidentes.get(i).getPrecio());
+		System.out.print("Vehiculos que contienen en el modelo la letra Y: ");		
+		for (Vehiculo vehiculo : find("Y",vehiculos)) {
+			System.out.println(vehiculo.printModelo()+" $"+vehiculo.getPrecio());
 		}
+		
 		System.out.println("=============================");
+		showOrdenados(ordenados);
 	}
 	
-	public void showOrdenados() {
+	public void showOrdenados(TreeSet<Vehiculo> ordenados) {
 		System.out.println("Vehículos ordenados por precio de mayor a menor:");
-		for (int i = 0; i < vehiculos.size(); i++) {
-			System.out.println(vehiculos.get(i).printModelo());
+		Set<Vehiculo> aux =  ordenados.descendingSet();
+		for (Vehiculo vehiculo : aux) {
+			System.out.println(vehiculo.printModelo());
 		}
+		
+		
 	}
-	
-	
 	
 }

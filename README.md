@@ -1,3 +1,3 @@
 # Ejercicio-Onready
 
-Desarrollado en JAVA 8
+Desarrollado en JAVA 7

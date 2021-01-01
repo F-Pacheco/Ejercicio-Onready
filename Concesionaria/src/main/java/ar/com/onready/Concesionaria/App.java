@@ -21,7 +21,6 @@ public class App
     	
     	pantalla.showVehiculos();
     	pantalla.showCategory();
-    	pantalla.showOrdenados();
     	
     	
     }

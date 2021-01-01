@@ -1,6 +1,6 @@
 package ar.com.onready.Entidades;
 
-public abstract class Vehiculo {
+public abstract class Vehiculo implements Comparable<Vehiculo> {
 	private String marca;
 	private String modelo;
 	private Float precio;
@@ -41,5 +41,46 @@ public abstract class Vehiculo {
 	public String toString() {
 		return  marca + " " + modelo;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vehiculo other = (Vehiculo) obj;
+		if (marca == null) {
+			if (other.marca != null)
+				return false;
+		} else if (!marca.equals(other.marca))
+			return false;
+		if (modelo == null) {
+			if (other.modelo != null)
+				return false;
+		} else if (!modelo.equals(other.modelo))
+			return false;
+		return true;
+	}
+	
+	//Metodo para ordenar por precio
+	
+		public int compareTo(Vehiculo vehiculo) {
+			if(this.precio - vehiculo.getPrecio() == 0){
+				return 1;
+			}else {
+				return (int) (this.precio - vehiculo.getPrecio());
+			}
+			
+		}
 	
 }
