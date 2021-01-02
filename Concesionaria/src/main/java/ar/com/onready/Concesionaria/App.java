@@ -20,8 +20,8 @@ public class App
     	pantalla.addVehiculo(moto);
     	
     	pantalla.showVehiculos();
-    	pantalla.showCategory();
-    	
+    	pantalla.showCategory("Y"); //no es case sensitive
+    	pantalla.showOrdenados();
     	
     }
 }

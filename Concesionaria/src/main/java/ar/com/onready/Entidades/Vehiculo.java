@@ -73,12 +73,12 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
 	}
 	
 	//Metodo para ordenar por precio
-	
+	//Devuelve el contrario de la operación para ordenarlo de mayor a menor
 		public int compareTo(Vehiculo vehiculo) {
 			if(this.precio - vehiculo.getPrecio() == 0){
 				return 1;
 			}else {
-				return (int) (this.precio - vehiculo.getPrecio());
+				return (int) -(this.precio - vehiculo.getPrecio());
 			}
 			
 		}

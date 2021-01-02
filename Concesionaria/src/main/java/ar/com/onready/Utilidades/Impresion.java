@@ -10,6 +10,7 @@ import ar.com.onready.Entidades.Vehiculo;
 public class Impresion {
 	
 	private Set<Vehiculo> vehiculos;
+	private TreeSet<Vehiculo> ordenados;
 	
 	//Constructor
 	public Impresion() {
@@ -29,37 +30,36 @@ public class Impresion {
 	}
 	
 	
+	//Paso los String a upperCase para buscar coincidencias 
 	public Set<Vehiculo> find(String c, Set<Vehiculo> vehiculos){
 		Set<Vehiculo> coincidentes= new HashSet<>();
 		for (Vehiculo vehiculo : vehiculos) {
-			if(vehiculo.getModelo().contains(c)) {
+			if(vehiculo.getModelo().toUpperCase().contains(c.toUpperCase())) {
 				coincidentes.add(vehiculo);
 			}
 		}
 		return coincidentes;
 	} 
 	
-	public void showCategory(){
-		TreeSet<Vehiculo> ordenados = new TreeSet<>(vehiculos);
-		System.out.println("Vehiculo mas caro: "+ordenados.last().printModelo());
-		System.out.println("Vehiculo mas barato: "+ordenados.first().printModelo());
+	public void showCategory(String c){
+		ordenados = new TreeSet<>(vehiculos);
+		System.out.println("Vehiculo mas caro: "+ordenados.first().printModelo());
+		System.out.println("Vehiculo mas barato: "+ordenados.last().printModelo());
 		
-		System.out.print("Vehiculos que contienen en el modelo la letra Y: ");		
-		for (Vehiculo vehiculo : find("Y",vehiculos)) {
+		System.out.print("Vehiculos que contienen en el modelo la letra "+c+": ");		
+		
+		for (Vehiculo vehiculo : find(c,vehiculos)) {
 			System.out.println(vehiculo.printModelo()+" $"+vehiculo.getPrecio());
 		}
-		
 		System.out.println("=============================");
-		showOrdenados(ordenados);
 	}
 	
-	public void showOrdenados(TreeSet<Vehiculo> ordenados) {
+	public void showOrdenados() {
 		System.out.println("Vehículos ordenados por precio de mayor a menor:");
-		Set<Vehiculo> aux =  ordenados.descendingSet();
-		for (Vehiculo vehiculo : aux) {
+		
+		for (Vehiculo vehiculo : ordenados) {
 			System.out.println(vehiculo.printModelo());
 		}
-		
 		
 	}
 	
