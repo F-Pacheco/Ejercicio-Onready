@@ -28,7 +28,13 @@ public class Moto extends Vehiculo{
 		return "Marca: " + getMarca() + " // Modelo: " + getModelo() +  " // Cilindrada: " + this.cilindrada + " // Precio: $" + getPrecio();
 	}
 	
+	public Boolean isVehiculoLujo() {
+		if (this.cilindrada.compareTo("149cc")>=0) {
+			return true;
+		}
+		return false;
 	
+	}
 	
 	
 }

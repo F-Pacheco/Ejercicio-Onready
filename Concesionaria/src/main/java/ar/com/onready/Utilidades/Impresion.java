@@ -63,4 +63,14 @@ public class Impresion {
 		
 	}
 	
+	public void showLujo() {
+		System.out.println("=============================");
+
+		for (Vehiculo vehiculo : vehiculos) {
+			if(vehiculo.isVehiculoLujo()) {
+				System.out.println(vehiculo);
+			}
+		}	
+	}
+	
 }

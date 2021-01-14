@@ -82,5 +82,9 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
 			}
 			
 		}
+		
+	public Boolean isVehiculoLujo() {
+		return false;
+	};
 	
 }
